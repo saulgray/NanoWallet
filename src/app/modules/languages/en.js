@@ -342,6 +342,23 @@ function EnglishProvider($translateProvider) {
         PORTAL_APOSTILLE_BTN_1: 'Create',
         PORTAL_APOSTILLE_BTN_2: 'Audit',
 
+        // ADDRESS BOOK MODULE
+        ADDRESS_BOOK_TITLE: 'Address book',
+        ADDRESS_BOOK_LIST: 'Contacts',
+        ADDRESS_BOOK_NAVIGATION: 'Navigation',
+        ADDRESS_BOOK_NEW: 'New contact',
+        ADDRESS_BOOK_EDIT: 'Edit contact',
+        ADDRESS_BOOK_REMOVE: 'Remove contact',
+        ADDRESS_BOOK_NEW_BTN: 'Add',
+        ADDRESS_BOOK_EDIT_BTN: 'Save',
+        ADDRESS_BOOK_REMOVE_BTN: 'Remove',
+        ADDRESS_BOOK_EXPORT_BTN: 'Export address book',
+        ADDRESS_BOOK_IMPORT_BTN: 'Import address book',
+        ADDRESS_BOOK_CONTACT_LABEL: 'Label',
+        ADDRESS_BOOK_ACCOUNT_ADDRESS: 'Account address',
+        ADDRESS_BOOK_ACTIONS: 'Actions',
+        ADDRESS_BOOK_MAX_NUMBER: 'Maximum contacts per batch is',
+
         // EXPLORER MODULE NAV
         EXPLORER_NAV_HOME: 'Home',
         EXPLORER_NAV_NSM: 'Namespaces & Mosaics',
@@ -486,6 +503,7 @@ function EnglishProvider($translateProvider) {
         ALERT_GET_SUB_NS_ERROR: 'Error at fetching mosaics definitions, reason: ',
         ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
         ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
+        ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Wallet successfully created and loaded !',
@@ -498,6 +516,7 @@ function EnglishProvider($translateProvider) {
         ALERT_SIGNATURE_SUCCESS: 'Transaction successfully signed !',
         ALERT_NTY_FILE_SUCCESS: 'Successfully loaded nty file !',
         ALERT_INCOMING_TX_FROM: 'Incoming transaction from ',
+        ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Successfully import !',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Convert an account to multisig',
