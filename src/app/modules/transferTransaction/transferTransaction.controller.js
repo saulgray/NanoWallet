@@ -92,6 +92,8 @@ class TransferTransactionCtrl {
         this.updateInvoiceQR();
 
         this.updateFees();
+
+        this.processRecipientInput();
     }
 
     /**
