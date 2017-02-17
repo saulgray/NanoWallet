@@ -19,6 +19,8 @@ class TransferTransactionCtrl {
         this._Transactions = Transactions;
         // DataBridge service
         this._DataBridge = DataBridge;
+        // RootScope object
+        this._RootScope = $rootScope;
 
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
@@ -333,6 +335,8 @@ class TransferTransactionCtrl {
         this.formData.recipient = '';
         // Encrypt message set to false
         this.formData.encryptMessage = false;
+        // Reset cleaned recipient address from $RootScope
+        this._RootScope.address = '';
     }
 
     /**
