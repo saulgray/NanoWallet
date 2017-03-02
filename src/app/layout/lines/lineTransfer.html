@@ -10,8 +10,9 @@
                  <tt>{{parent.otherTrans.signer | fmtPubToAddress:networkId | fmtAddress}}</tt>
             </td>
             <td class="amountTx">
-                <span ng-show="tx.mosaics.length">
-                {{tx.mosaics.length}} <span class="fa fa-th text-info"></span></strong>
+                <span ng-show="tx.mosaics.length" ng-repeat="mos in tx.mosaics">
+                {{(mos.quantity | fmtSupply:mos.mosaicId:mosaicDefinitionMetaDataPair)[0]}}<span class="text-muted">.{{(mos.quantity | fmtSupply:mos.mosaicId:mosaicDefinitionMetaDataPair)[1]}}</span>:{{mos.mosaicId.name}}</strong>
+<br>
                 </span>
                 <span ng-hide="tx.mosaics.length">
                     <span ng-show="!parent">

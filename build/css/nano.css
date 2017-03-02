@@ -224,7 +224,7 @@ th {
   float: right; }
 
 .formFloat .mosaic {
-  max-width: 40%;
+  max-width: 15%;
   text-overflow: hidden;
   white-space: nowrap; }
 
@@ -611,6 +611,16 @@ input[type=checkbox]:checked + label:before {
   .navbar-default .navbar-nav li .dropdown-menu {
     min-width: 200px;
     width: 200px; }
+  .navbar-default .navbar-nav li.money a {
+    float: left;
+    font-size: 90%; }
+  .navbar-default .navbar-nav li.money select {
+    float: left;
+    margin-right: 20px;
+    margin-top: 8.33333px;
+    min-width: auto;
+    width: 200px;
+    max-width: 280px; }
   .navbar-default .login {
     text-transform: uppercase;
     border-left: 1px solid rgba(0, 0, 0, 0.05); }
@@ -759,7 +769,8 @@ table.top {
 
 .amountTx, .mosaicChange {
   width: 17%;
-  color: black; }
+  color: black;
+  text-transform: uppercase; }
 
 .messageTx {
   width: 20%; }

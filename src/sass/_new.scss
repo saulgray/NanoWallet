@@ -573,6 +573,24 @@ input[type=checkbox]:checked + label:before {
 			min-width: 200px;
 			width: 200px;
 		}
+		&.money {
+			a {
+				float: left;
+				font-size: 90%;
+			}
+			select {
+				float: left;
+				margin-right: $pad;
+				margin-top: $pad / 2.4;
+				min-width:auto;
+				width: $pad * 10;
+				max-width: $pad * 14;
+			}
+			option {
+
+			}
+
+		}
   }
   .login {
     text-transform: uppercase;
@@ -767,8 +785,8 @@ table.top {
   width: 17%;
   @extend %overflowHide;
   @extend %tableDisplay;
-  // font-size: 12px;
   color: black;
+	text-transform: uppercase;
 }
 .messageTx {
   width: 20%;
@@ -1252,4 +1270,7 @@ textarea {
       }
     }
   }
+}
+
+.amountTx {
 }
