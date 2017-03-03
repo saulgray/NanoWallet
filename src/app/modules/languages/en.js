@@ -73,6 +73,8 @@ function EnglishProvider($translateProvider) {
         GENERAL_LEVY: 'Levy',
         GENERAL_LEVY_TYPES: 'Levy types',
         GENERAL_LEVY_TYPES_NOTE: 'I - constant fee; II - percentage based',
+        GENERAL_LEVY_TYPE_1: 'constant fee',
+        GENERAL_LEVY_TYPE_2: 'percentage based',
         GENERAL_SEND: 'Send',
         GENERAL_TO: 'To',
         GENERAL_HASH: 'Hash',

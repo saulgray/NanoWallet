@@ -93,13 +93,13 @@
                 <div class="col-sm-9">{{parent.signer | fmtPubToAddress:networkId | fmtAddress}}</div>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-sm-12">
                     <hr style="border-style: dashed;margin:5px;" />
                 </div>
-            </div>
+            </div> -->
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-sm-3"><b>{{ 'GENERAL_AMOUNT' | translate }}</b></div>
                 <div class="col-sm-9">
                     <strong>{{(tx.amount | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{(tx.amount | fmtNemValue)[1]}}</span> XEM
@@ -113,7 +113,7 @@
                 <div class="col-sm-9">
                     {{(tx.fee | fmtNemValue)[0]}}.<span class="text-muted">{{(tx.fee | fmtNemValue)[1]}}</span> XEM
                 </div>
-            </div>
+            </div> -->
 
             <div class="row" ng-show="parent">
                 <div class="col-sm-3"><b>{{ 'LINE_TX_DETAILS_MULTISIG_FEE' | translate }}</b></div>
@@ -127,7 +127,7 @@
                     </div>
 
                 <div class="col-sm-12">
-                    <strong>{{ 'LINE_TX_DETAILS_MOS_ATTACHED' | translate }}: </strong> {{tx.mosaics.length}} <span class="fa fa-th text-info"></span>
+                    <strong>{{ 'LINE_TX_DETAILS_MOS_ATTACHED' | translate }}: </strong> {{tx.mosaics.length}}
                 </div>
             </div>
 
