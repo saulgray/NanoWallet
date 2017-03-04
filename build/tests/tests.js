@@ -24148,7 +24148,7 @@ var defaultMainnetNode = 'http://alice6.nem.ninja:7778';
  *
  * @type {string}
  */
-var defaultMijinNode = 'http://a1.dfintech.com:7778';
+var defaultMijinNode = 'http://m1.dfintech.com:7778';
 
 /**
  * The default mainnet block explorer
@@ -24215,7 +24215,7 @@ var mainnetSearchNodes = [{
  * @type {array}
  */
 var mijinSearchNodes = [{
-  'uri': 'http://a1.dfintech.com:7895',
+  'uri': 'http://m1.dfintech.com:7895',
   'location': 'A1'
 }, {
   'uri': 'http://a2.dfintech.com:7895',
@@ -24286,7 +24286,7 @@ var mainnetNodes = [{
  * @type {array}
  */
 var mijinNodes = [{
-  uri: 'http://a1.dfintech.com:7778'
+  uri: 'http://m1.dfintech.com:7778'
 }, {
   uri: 'http://a2.dfintech.com:7778'
 }, {
