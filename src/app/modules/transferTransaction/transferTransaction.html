@@ -18,15 +18,15 @@
           <!-- CURRENCY SELECT -->
           <fieldset class="form-group">
             <div class="input-group">
-            <span class="input-group-btn">
-              <label class="control-label">Currency: </label>
-            </span>
+              <span class="input-group-btn">
+                <label class="control-label">Currency: </label>
+              </span>
               <select class="col-sm-7 form-control" ng-options="mosaicName for mosaicName in $ctrl.currentAccountMosaicNames" ng-model="$ctrl.selectedMosaic" required="required" id="mosaic" ng-disabled="!$ctrl.formData.isMosaicTransfer"></select>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-success" ng-click="$ctrl.attachMosaic()" ng-disabled="!$ctrl.formData.isMosaicTransfer">{{ 'TRANSFER_TRANSACTION_ATTACH' | translate }}</button>
               </span>
             </div>
-            </fieldset>
+          </fieldset>
 
 
           <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
