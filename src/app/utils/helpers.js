@@ -23,24 +23,6 @@ let haveWallet = function(walletName, array) {
 }
 
 /**
- * Check if address book already present in an array
- *
- * @param {string} addressBookName - A address book name
- * @param {array} array - A address books array
- *
- * @return {boolean} - True if present, false otherwise
- */
-let haveAddressBook = function(addressBookName, array) {
-    let i = null;
-    for (i = 0; array.length > i; i++) {
-        if (array[i].name === addressBookName) {
-            return array[i];
-        }
-    }
-    return false;
-}
-
-/**
  * Check if a multisig transaction needs signature
  *
  * @param {object} multisigTransaction - A multisig transaction
@@ -364,9 +346,32 @@ let convertDateToString = function(date) {
     return date.toDateString();
 };
 
+/**
+ * Check if an input amount is valid
+ *
+ * @param {string} n - The number as a string
+ *
+ * @return {boolean} - True if valid, false otherwise
+ */
+let isAmountValid = function(n) {
+    // Force n as a string and replace decimal comma by a dot if any
+    var nn = Number(n.toString().replace(/,/g, '.'));
+    return !Number.isNaN(nn) && Number.isFinite(nn) && nn >= 0;
+}
+
+/**
+ * Clean an input amount and return it as number
+ *
+ * @param {string} n - The number as a string
+ *
+ * @return {number} - The clean amount
+ */
+let cleanAmount = function(n) {
+    return Number(n.toString().replace(/,/g, '.'));
+}
+
 module.exports = {
     haveWallet,
-    haveAddressBook,
     needsSignature,
     txTypeToName,
     haveTx,
@@ -384,5 +389,7 @@ module.exports = {
     checkAndFormatUrl,
     createTimeStamp,
     getTimestampShort,
-    convertDateToString
+    convertDateToString,
+    isAmountValid,
+    cleanAmount
 }

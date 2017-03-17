@@ -128,6 +128,27 @@ class DataBridge {
          * @type {object|undefined}
          */
         this.marketInfo = undefined;
+
+        /**
+         * The Bitcoin price value
+         *
+         * @type {object|undefined}
+         */
+        this.btcPrice = undefined;
+
+        /**
+         * The network time
+         *
+         * @type {number}
+         */
+        this.networkTime = undefined;
+
+        /**
+         * Store the time sync interval function
+         *
+         * @type {setInterval}
+         */
+        this.timeSyncInterval = undefined;
     }
 
     /**
@@ -146,9 +167,25 @@ class DataBridge {
             // Reset at new connection
             this.reset();
 
+            // Start time sync
+            this.timeSync();
+
             /***
              * Few network requests happen on socket connection
              */
+
+             /**
+             * Fetch network time
+             */
+            this._NetworkRequests.getNEMTime(helpers.getHostname(this._Wallet.node)).then((res) => {
+                this._$timeout(() => {
+                    this.networkTime = res.receiveTimeStamp / 1000;
+                });
+            },(err) => {
+                this._$timeout(() => {
+                    this._Alert.errorGetTimeSync();
+                });
+            });
 
             // Gets current height
             this._NetworkRequests.getHeight(helpers.getHostname(this._Wallet.node)).then((height) => {
@@ -192,14 +229,28 @@ class DataBridge {
             this._NetworkRequests.getMarketInfo().then((data) => {
                     this._$timeout(() => {
                         this.marketInfo = data;
+
                     });
-                },
-                (err) => {
+            },
+            (err) => {
                     this._$timeout(() => {
                         this._Alert.errorGetMarketInfo();
                         this.marketInfo = undefined;
                     });
-                });
+            });
+
+            // Gets btc price
+            this._NetworkRequests.getBtcPrice().then((data) => {
+                    this._$timeout(() => {
+                        this.btcPrice = data;
+                    });
+            },
+            (err) => {
+                    this._$timeout(() => {
+                        this._Alert.errorGetBtcPrice();
+                        this.btcPrice = undefined;
+                    });
+            });
 
             // Set connection status
             this._$timeout(() => {
@@ -270,6 +321,16 @@ class DataBridge {
                         }
                         console.log("Unconfirmed data: ", d);
                     }
+
+                    if(undefined !== d.transaction.mosaics && d.transaction.mosaics.length) {
+                        for (let i = 0; i < d.transaction.mosaics.length; i++) {
+                            let mos = d.transaction.mosaics[i];
+                            if(undefined === this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)]){
+                                // Fetch definition from network
+                                getMosaicDefinitionMetaDataPair(mos);
+                            }
+                        }
+                    }
                 }, 0);
             }
 
@@ -324,6 +385,33 @@ class DataBridge {
                 }, 0);
             }
 
+            let getMosaicDefinitionMetaDataPair = (mos) => {
+                if (undefined !== mos.mosaicId) {
+                    // Fetch definition from network
+                    return this._NetworkRequests.getOtherMosaic(helpers.getHostname(this._Wallet.node), mos.mosaicId.namespaceId).then((res) => {
+                        if(res.data.length) {
+                            for(let i = 0; i < res.data.length; i++) {
+                                if (res.data[i].mosaic.id.namespaceId == mos.mosaicId.namespaceId && res.data[i].mosaic.id.name == mos.mosaicId.name) {
+                                    this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)] = {};
+                                    this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)].supply = res.data[i].mosaic.properties[1].value;
+                                    this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)].mosaicDefinition = res.data[i].mosaic;
+
+                                    if(undefined !== res.data[i].mosaic.levy) {
+                                        if(undefined === this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(res.data[i].mosaic.levy.mosaicId)]) {
+                                            // Fetch definition from network
+                                            return getMosaicDefinitionMetaDataPair(res.data[i].mosaic.levy);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    (err) => {
+                        this._Alert.transactionError('Failed to fetch definition of ' + helpers.mosaicIdToName(mos.mosaicId));
+                    });
+                }
+            }
+
 
             // Set websockets callbacks
             connector.onConfirmed(confirmedCallback);
@@ -360,6 +448,25 @@ class DataBridge {
         this.harvestedBlocks = [];
         this.delegatedData = undefined;
         this.marketInfo = undefined;
+        this.networkTime = undefined;
+        clearInterval(this.timeSyncInterval)
+    }
+
+    /**
+     * Fetch network time every minute
+     */
+    timeSync() {
+        this.timeSyncInterval = setInterval(() => { 
+            this._NetworkRequests.getNEMTime(helpers.getHostname(this._Wallet.node)).then((res) => {
+                this._$timeout(() => {
+                    this.networkTime = res.receiveTimeStamp / 1000;
+                });
+            },(err) => {
+                this._$timeout(() => {
+                    this._Alert.errorGetTimeSync();
+                });
+            });
+        }, 60 * 1000);
     }
 
 }
