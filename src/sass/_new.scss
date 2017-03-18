@@ -741,13 +741,26 @@ footer {
     }
   }
   .updates {
+	h1 {
+	  @media only screen and (max-width : $lg) {
+	    font-size: 20px;
+	  }
+	}
+	h5 {
+	  @media only screen and (max-width : $lg) {
+	    font-size: 13px;
+	  }
+	}
     p {
   	  font-size: 12px;
+	  @media only screen and (max-width : $lg) {
+		font-size: 11px;
+	  }
     }
     a{
-    	color: $blue;
-    	text-decoration: underline;
-    	font-weight: 500;
+      color: $blue;
+      text-decoration: underline;
+      font-weight: 500;
     }
   }
   .arrows {
@@ -1213,29 +1226,44 @@ textarea {
 }
 
 /*** MARKET INFO WIDGET ***/
-.market-info .header{
+.market-info{
+  .header{
 	color: rgba(0, 0, 0, 0.3);
 	font-size: 12px;
 	font-weight: 700;
-}
-.market-info h4 {
-  margin-bottom: $pad;
-}
-.market-info .header span{
+  }
+  h4 {
+    margin-bottom: $pad;
+	@media only screen and (max-width : $lg) {
+	  font-size: 22px;
+	}
+  }
+  .fa-refresh {
+	font-size: 18px;
+	padding-left: $pad;
+	cursor: pointer;
+	@media only screen and (max-width : $lg) {
+	  font-size: 14px;
+	  padding-left: $pad / 2;
+	}
+  }
+   // amount
+  .header span{
 	font-weight: 500;
 	font-size: 20px;
 	color: black;
-  @media only screen and (max-width : $xl) {
-    font-size: 15px;
+    @media only screen and (max-width : $xl) {
+      font-size: 15px;
+    }
+    @media only screen and (max-width : $lg) {
+      font-size: 12px;
+    }
   }
-  @media only screen and (max-width : $lg) {
-    font-size: 12px;
-  }
-}
-.market-info .ticker {
+  .ticker {
 	padding-top: $pad;
-  @media only screen and (max-width : $md) {
-    padding-top: 0px;
+    @media only screen and (max-width : $md) {
+      padding-top: 0px;
+    }
   }
 }
 .marketPercents {
