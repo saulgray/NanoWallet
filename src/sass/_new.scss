@@ -203,6 +203,24 @@ label {
 			border-radius: 0px;
 		}
 	}
+  &.harvesting {
+	max-width: $pad * 4;
+  }
+  &.harvestingStart {
+    max-width: $pad * 2;
+  }
+  &.harvesting, &.harvestingStart {
+	  .btn-primary {
+  	  background-color: $blue;
+  	  border: 1px solid $blue;
+  	  color: $white;
+  	  &.active, &:hover, &:active, &:focus, &:visited {
+  		  border: 1px solid $blueLite !important;
+  		background-color: $blueLite !important;
+  		color: $white !important;
+  	  }
+  	}
+  }
   &.short {
     min-width: 130px;
   }
