@@ -214,6 +214,7 @@ label {
   	  background-color: $blue;
   	  border: 1px solid $blue;
   	  color: $white;
+	  border-radius: 0px;
   	  &.active, &:hover, &:active, &:focus, &:visited {
   		  border: 1px solid $blueLite !important;
   		background-color: $blueLite !important;
@@ -452,6 +453,8 @@ fieldset .form-control.has-error {
 	color: $white;
 	border: 1px solid $blue;
 	background: $blue;
+	min-width: 150px;
+	// width: 300px;
 }
 .tooltip.top .tooltip-arrow {
   border-top-color: $blue;
