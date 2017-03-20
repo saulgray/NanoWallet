@@ -209,6 +209,15 @@ label {
   &.harvestingStart {
     max-width: $pad * 2;
   }
+	&.harvestingStart button:nth-of-type(2){
+		background: $red;
+		border: 1px solid $red;
+		&.active, &:hover, &:active, &:focus, &:visited {
+			border: 1px solid $redLite !important;
+			background-color: $redLite !important;
+			color: $white !important;
+		}
+	}
   &.harvesting, &.harvestingStart {
 	  .btn-primary {
   	  background-color: $blue;
@@ -453,8 +462,7 @@ fieldset .form-control.has-error {
 	color: $white;
 	border: 1px solid $blue;
 	background: $blue;
-	min-width: 150px;
-	// width: 300px;
+	min-width: 120px;
 }
 .tooltip.top .tooltip-arrow {
   border-top-color: $blue;
