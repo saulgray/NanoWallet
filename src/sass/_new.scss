@@ -203,6 +203,34 @@ label {
 			border-radius: 0px;
 		}
 	}
+  &.harvesting {
+	max-width: $pad * 4;
+  }
+  &.harvestingStart {
+    max-width: $pad * 2;
+  }
+	&.harvestingStart button:nth-of-type(2){
+		background: $red;
+		border: 1px solid $red;
+		&.active, &:hover, &:active, &:focus, &:visited {
+			border: 1px solid $redLite !important;
+			background-color: $redLite !important;
+			color: $white !important;
+		}
+	}
+  &.harvesting, &.harvestingStart {
+	  .btn-primary {
+  	  background-color: $blue;
+  	  border: 1px solid $blue;
+  	  color: $white;
+	  border-radius: 0px;
+  	  &.active, &:hover, &:active, &:focus, &:visited {
+  		  border: 1px solid $blueLite !important;
+  		background-color: $blueLite !important;
+  		color: $white !important;
+  	  }
+  	}
+  }
   &.short {
     min-width: 130px;
   }
@@ -434,6 +462,7 @@ fieldset .form-control.has-error {
 	color: $white;
 	border: 1px solid $blue;
 	background: $blue;
+	min-width: 120px;
 }
 .tooltip.top .tooltip-arrow {
   border-top-color: $blue;
