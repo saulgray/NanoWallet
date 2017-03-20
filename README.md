@@ -38,13 +38,19 @@ Before update make sure that you don't have any wallets stored into the NanoWall
 
 ##### OR #####
 
-4) Run NanoWallet as App (packaged with chromium browser)
+4) Build with browserSync:
+
+<pre>gulp build-dev</pre>
+
+##### OR #####
+
+5) Run NanoWallet as App (packaged with chromium browser)
 
 <pre>npm run devApp</pre>
 
 ##### OR #####
 
-5) Build NanoWallet apps, default set to : win64,osx64,linux64
+6) Build NanoWallet apps, default set to : win64,osx64,linux64
 
 <pre>gulp build-app</pre>
 

@@ -144,6 +144,7 @@ gulp.task('app', function () {
 
   // Run Tasks
   gulp.task('default', ['html', 'js', 'sass', 'css', 'images', 'package', 'browserify', 'tests', 'browserifyTests'], function() {
+
   });
   // Run Tasks for dev
   gulp.task('build-dev', ['html', 'js', 'sass', 'css', 'images', 'package', 'browserify', 'tests', 'browserifyTests'], function() {
