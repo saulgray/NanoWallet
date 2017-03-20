@@ -143,12 +143,12 @@ gulp.task('app', function () {
   });
 
 // Run Tasks
-gulp.task('default', ['html', 'js', 'sass', 'css', 'images', 'package', 'tests'], function() {
+gulp.task('default', ['html', 'js', 'sass', 'css', 'images', 'package', 'browserify', 'tests', 'browserifyTests'], function() {
 });
 // Run Tasks for dev
 gulp.task('build-dev', ['html', 'js', 'sass', 'css', 'images', 'package', 'browserify', 'tests', 'browserifyTests'], function() {
 
-  // Uncomment below for dev mode (watch and build as you change the code)
+  // below is for dev mode (watch and build as you change the code)
   browserSync.init(['./build/**/**.**'], {
     server: "./build",
     index: "start.html",
