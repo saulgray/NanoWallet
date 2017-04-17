@@ -167,5 +167,5 @@ gulp.task('app', function () {
   });
 
   // Build packaged apps for production
-  gulp.task('build-app', ['html', 'js', 'sass', 'css', 'images', 'package', 'app'], function() {
+  gulp.task('build-app', ['html', 'js', 'sass', 'css', 'images', 'package', 'app', 'browserify', 'tests', 'browserifyTests'], function() {
   });
