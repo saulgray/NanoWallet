@@ -16,7 +16,7 @@ const AppConstants = {
     mainnetDisabled: false,
 
     // Activate/Deactivate mijin
-    mijinDisabled: true,
+    mijinDisabled: false,
 
     // Available languages
     languages: [{
