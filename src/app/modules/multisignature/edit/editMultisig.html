@@ -18,7 +18,7 @@
                 <span class="input-group-btn">
                   <label>{{ 'AGGREGATE_MODIFICATION_EDIT_SELECT_TITLE' |translate }}: </label>
                 </span>
-               	<select class="form-control" ng-options="account as account.address for (index, account) in $ctrl._DataBridge.accountData.meta.cosignatoryOf" ng-model="$ctrl.formData.accountToEdit" ng-change="$ctrl.processAccountToEdit();">
+               	<select class="form-control" ng-options="(acc.address | fmtContact:$ctrl.contacts) for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.accountToEdit" ng-change="$ctrl.processAccountToEdit();">
                		<option value="" disabled selected> {{ 'AGGREGATE_MODIFICATION_EDIT_SELECT' | translate }}</option>
               	</select>
               </div>
@@ -102,7 +102,7 @@
             </fieldset>
             <!-- SEND TRANSACTION -->
             <button class="btn btn-success pull-xs-right"
-              type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.multisigPubKey || !$ctrl.cosignatoryArray.length && !$ctrl.formData.minCosigs" ng-click="$ctrl.send()">
+              type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.multisigPubKey || !$ctrl.cosignatoryArray.length && !$ctrl.formData.minCosigs || !$ctrl.isMinSignaturesValid(true)" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{'GENERAL_SEND' | translate}}
             </button>
           </fieldset>

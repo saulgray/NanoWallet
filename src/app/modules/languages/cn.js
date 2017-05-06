@@ -143,6 +143,8 @@ function ChineseProvider($translateProvider) {
         GENERAL_CURRENCY: 'Currency',
         GENERAL_EDIT: 'Edit',
         GENERAL_SEND_XEM: 'Send XEM',
+        GENERAL_ACTIVE: 'Active',
+        GENERAL_INACTIVE: 'Inactive',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
@@ -218,6 +220,7 @@ function ChineseProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Please select a multisig account to show status',
         IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Reveal delegated private key',
         IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegated account Keys',
+        IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Harvesting status',
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: '创建马赛克',
@@ -352,6 +355,7 @@ function ChineseProvider($translateProvider) {
         PORTAL_MULTISIG_TEXT: '多重签名账户中提供可编辑的链上协议，是存储资金，实现共有账户的最佳实现方式',
         PORTAL_MULTISIG_BTN_1: '转换账户为多重签名',
         PORTAL_MULTISIG_BTN_2: '编辑已有协议',
+        PORTAL_MULTISIG_BTN_3: 'Sign multisig transactions',
         PORTAL_HARVESTING_TITLE: '委托收获',
         PORTAL_HARVESTING_TEXT: '委托收获是可以实现远程在线“挖矿”而不必保持原账号开启的途径',
         PORTAL_HARVESTING_BTN_1: '管理远程账户',
@@ -545,6 +549,10 @@ function ChineseProvider($translateProvider) {
         ALERT_FILE_SIZE_ERROR: ' is too big, maximum size allowed is 100 MB',
         ALERT_MESSAGE_DECODE_KEY_ERROR: 'Message decryption failed because an account has no public key visible on the network',
         ALERT_FETCH_TIME_SYNC_ERROR: 'An error occured at fetching network time !',
+        ALERT_MULTISIG_MIN_SIGNATURE: 'Multisignature account needs at least one minimum signature',
+        ALERT_BTC_MARKET_ERROR: 'Error while trying to fetch Bitcoin price',
+        ALERT_COSIG_REMOVAL_LIMIT: 'Only one cosignatory at a time can be removed',
+        ALERT_MULTISIG_MIN_SIGNATURE: 'Invalid number of minimum signatures',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: '钱包成功创建和加载！',
@@ -586,6 +594,9 @@ function ChineseProvider($translateProvider) {
         AGGREGATE_MIN_SIGNATURES: '最少签名数',
         AGGREGATE_SELECT_WALLET_ACCOUNT: 'Use wallet account',
 
+        // SIGN MULTISIGNATURE TRANSACTIONS
+        SIGN_MULTISIG_TRANSACTIONS_TITLE: 'Sign multisignature transactions',
+
         // LOGIN MODULE
         LOGIN_MEMBER_TITLE: '已经是NEMber ？',
         LOGIN_UPGRADE_TITLE: '钱包需要升级',
@@ -608,8 +619,21 @@ function ChineseProvider($translateProvider) {
         SIGNUP_NETWORK_SELECT: 'Select a network', //
         SIGNUP_BRAIN_WALLET_WARNING: '请阅读脑钱包的<a href="https://en.bitcoin.it/wiki/Brainwallet" rel="nofollow" target="_blank">风险</a>。脑钱包只使用hash处理的单一密码作为私钥，长期或不当使用会导致失窃。使用中选择一个安全的密码至关重要。 请遵从<a href="https://xkcd.com/936/" rel="nofollow" target="_blank">XKCD #936</a>国际密码安全标准。',
         SIGNUP_PRIVATE_KEY_WALLET_WARNING: '脑钱包只使用hash处理的单一密码作为私钥，长期或不当使用会导致失窃。使用中选择一个安全的密码至关重要。',
-        SIGNUP_COMMON_WALLET_WARNING: 'Wallets are stored <a><b>temporarily</b></a> in the browser local storage! You should have triggered a download after creating the wallet. It is the .wlt file used as a backup and to import back if your browser\’s local storage is erased. If you don\'t get a backup .wlt file, log into your account, copy your private key and paste it somewhere safe. It is your responsibility to always make sure you have your private key backed up before sending any funds to your account.',
+        SIGNUP_COMMON_WALLET_WARNING_TITLE: 'Account safety warning',
+        SIGNUP_COMMON_WALLET_WARNING_1: 'Wallets are stored <b><u>temporarily</u></b> in the browser local storage! Browsers can be configured (e.g. by add-ons) to clear the local storage at times. This will lead to the loss of the data and it can\'t be undone easily. In our case your wallets would be gone so it is very important to make sure you have all needed informations to restore your accounts.',
+        SIGNUP_COMMON_WALLET_WARNING_2: 'You should have triggered a download after creating the wallet. It is the <b><i>.wlt</i></b> file used as a backup and to import back if your browser’s local storage is erased.',
+        SIGNUP_COMMON_WALLET_WARNING_3: 'If you don\'t get a backup <b><i>.wlt</i></b> file, click on button below to reveal the raw wallet data and create the file manually:',
+        SIGNUP_COMMON_WALLET_WARNING_4: 'Even if you have a wallet file it is <b><u>mandatory</u></b> to backup your account\'s private key, click on button below to reveal it:',
+        SIGNUP_COMMON_WALLET_WARNING_5: 'It is your responsibility to always make sure you have your private key backed up before sending any funds to your account.',
+        SIGNUP_COMMON_WALLET_WARNING_6: 'Each wallet has a <b><u>primary private key</u></b> (yours is shown above) that is used to create deterministic secondary accounts (BIP32). This feature requires to use the <b><u>same password</u></b> or it will generate different secondary accounts for the same primary private key. When backing up your data don\'t forget to <b><u>take note of your password</u></b>.',
+        SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'Show raw wallet file',
+        SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'To make a wallet file, create an empty text file and put the above base 64 key into it. <br>Save the file as <b><i>yourWalletName.wlt</i></b> and it can now be imported.',
+        SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'Show private key',
+        SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO: 'To backup a private key, save it in a text file, print it or write it somewhere safe. <br>It is recommend to store the private key offline.',
         SIGNUP_COMMON_WALLET_WARNING_FOOTER: 'By clicking below, you agree that you have read and understood the above warnings.',
+        SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'I have my wallet file',
+        SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'I have my private key',
+        SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: 'I agree',
 
         // FAQ MODULE
         FAQ_TITLE: '疑难解答',

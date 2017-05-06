@@ -3,7 +3,7 @@ import helpers from '../../../utils/helpers';
 import CryptoHelpers from '../../../utils/CryptoHelpers';
 
 class EditMultisigCtrl {
-    constructor(Wallet, NetworkRequests, Alert, Transactions, DataBridge, $location) {
+    constructor(Wallet, NetworkRequests, Alert, Transactions, DataBridge, $location, $localStorage) {
         'ngInject';
 
         // Wallet service
@@ -18,6 +18,8 @@ class EditMultisigCtrl {
         this._DataBridge = DataBridge;
         // $location to redirect
         this._location = $location;
+        //Local storage
+        this._storage = $localStorage;
 
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
@@ -47,6 +49,14 @@ class EditMultisigCtrl {
         this.formData.cosignatoryAddress = '';
         // No min cosignatory modification by default
         this.formData.minCosigs = null;
+
+        this.contacts = [];
+
+        this.multisigInfosData = undefined;
+
+        if(undefined !== this._storage.contacts && undefined !== this._storage.contacts[this._Wallet.currentAccount.address] && this._storage.contacts[this._Wallet.currentAccount.address].length) {
+            this.contacts = this._storage.contacts[this._Wallet.currentAccount.address]
+        }
 
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
@@ -145,12 +155,15 @@ class EditMultisigCtrl {
                     numberAdded++;
                 }
             }
-            // Update min cosigs if total cosignatories - deleted accounts + added accounts is < min cosig number 
+            // Update min cosigs if total cosignatories - deleted accounts + added accounts is < min cosig number
             if (this.multisigInfosData.cosignatories.length - numberDeleted + numberAdded < this.multisigInfosData.minCosigs) {
                 // Calculate the number to add or remove of min signatures
-                this.formData.minCosigs = this.multisigInfosData.cosignatories.length - numberDeleted - this.multisigInfosData.minCosigs + numberAdded;
-            } else {
+                let sigs = this.multisigInfosData.cosignatories.length - numberDeleted - this.multisigInfosData.minCosigs + numberAdded;
+                this.formData.minCosigs = sigs;
+            } else if(this.isMinSignaturesValid(false)) {
                 this.formData.minCosigs = null;
+            } else {
+                this._Alert.errorMultisigMinSignatureInvalid();
             }
     }
 
@@ -259,6 +272,33 @@ class EditMultisigCtrl {
         let entity = this._Transactions._constructAggregateModifications(this._DataBridge.accountData.account.publicKey, this.formData, this.cosignatoryArray);
         this.formData.fee = entity.fee;
         this.formData.innerFee = entity.otherTrans.fee;
+        this.isMinSignaturesValid(false);
+    }
+
+    /**
+     * Check if multisig account has at least one minimum signature remaining after change
+     *
+     * @param {boolean} isSend - True if the check is in send button, false otherwise 
+     * Without the boolean the check in send button will trigger infinite digest cycles for the alert
+     */
+    isMinSignaturesValid(isSend) {
+        if (undefined !== this.multisigInfosData && null !== this.formData.minCosigs) {
+            if(isNaN(this.formData.minCosigs)) {
+                return false;
+            }
+            let sigs = this.formData.minCosigs + this.multisigInfosData.minCosigs;
+            // If number of sigs is below one and if there is not only one cosignatory
+            if (sigs < 1 && this.multisigInfosData.minCosigs > 1) {
+                if(!isSend) {
+                    this._Alert.errorMultisigMinSignature();
+                }
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -303,6 +343,12 @@ class EditMultisigCtrl {
      * @param type: modification type (1 to add or 2 to remove)
      */
     addCosig(type) {
+        // If removal, check if one already present in modification
+        if(type === 2 && this.hasRemoval()) {
+            this._Alert.cosignatoryRemovalLimit();
+            return;
+        }
+            
         if (helpers.haveCosig(this.formData.cosignatoryAddress, this.formData.cosignatoryPubKey, this.cosignatoryArray)) {
             // Alert
             this._Alert.cosignatoryAlreadyPresentInList();
@@ -317,6 +363,18 @@ class EditMultisigCtrl {
             // Update the fee
             this.updateFee();
         }
+    }
+
+    /**
+     * Check if modifications array already has a removal type
+     */
+    hasRemoval() {
+        for (let i = 0; i < this.cosignatoryArray.length; i++) {
+            if (this.cosignatoryArray[i].type === 2) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
